@@ -1,10 +1,11 @@
 const body = document.querySelector('body');
 
 const clampedKeys = (func, arrayKeys) => {
+
     let setKeys = new Set();
 
     document.addEventListener('keydown', (evt) => {
-        setKeys.add(evt.keyCode);
+        setKeys.add(evt.code);
 
         let arrayKey = Array.from(setKeys);
 
@@ -13,18 +14,14 @@ const clampedKeys = (func, arrayKeys) => {
             func();
         }
     });
-
     document.addEventListener('keyup', function(evt) {
-        setKeys.delete(evt.keyCode);
+        setKeys.delete(evt.code);
     });
-}
+
+};
 
 const bodyGrid = () => {
-    if (body.className === 'grid') {
-        body.classList.remove('grid');
-    } else {
-        body.classList.add('grid');
-    }
-}
+    body.classList.toggle('grid');
+};
 
-clampedKeys(bodyGrid, [17, 32]);
+clampedKeys(bodyGrid, ['ControlLeft', 'Space']);
